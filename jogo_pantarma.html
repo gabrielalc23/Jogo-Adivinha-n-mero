@@ -1,0 +1,183 @@
+<HTML>
+  <HEAD>
+    <META CHARSET="UTF-8"/>
+    <TITLE>Jogo do Pantarma</TITLE>
+    <STYLE>
+      table{
+        display: inline-table;
+        margin: 10px;
+        // border: 3px solid #000;
+      }
+    </STYLE>
+  <HEAD>
+  <BODY>
+    <TABLE id="tabNum1"  ONCLICK="pinta(this.id)"></TABLE>
+    <TABLE id="tabNum2"  ONCLICK="pinta(this.id)"></TABLE>
+    <TABLE id="tabNum4"  ONCLICK="pinta(this.id)"></TABLE>
+    <BR/><BR/>
+    <TABLE id="tabNum8"  ONCLICK="pinta(this.id)"></TABLE>
+    <TABLE id="tabNum16" ONCLICK="pinta(this.id)"></TABLE>
+    <TABLE id="tabNum32" ONCLICK="pinta(this.id)"></TABLE>
+	
+	<INPUT TYPE="button" ONCLICK="adivinhar()" VALUE="Adivinhar" />
+   </BODY>
+</HTML>
+<SCRIPT>
+  function pinta(elemento){
+	tabela = document.getElementById(elemento);
+	if(tabela.style.color == ""){
+		tabela.style.color = "#FF0000";
+	}else{
+		tabela.style.color = "";
+	}
+  }
+  
+  function adivinhar(){
+	var numeroAdivinhado = 0;
+	
+	if(document.getElementById("tabNum1").style.color != "")
+		numeroAdivinhado = numeroAdivinhado + 1;
+	
+	if(document.getElementById("tabNum2").style.color != "")
+		numeroAdivinhado = numeroAdivinhado + 2;
+	
+	if(document.getElementById("tabNum4").style.color != "")
+		numeroAdivinhado = numeroAdivinhado + 4;
+	
+	if(document.getElementById("tabNum8").style.color != "")
+		numeroAdivinhado = numeroAdivinhado + 8;
+	
+	if(document.getElementById("tabNum16").style.color != "")
+		numeroAdivinhado = numeroAdivinhado + 16;
+	
+	if(document.getElementById("tabNum32").style.color != "")
+		numeroAdivinhado = numeroAdivinhado + 32;
+		
+	alert("O número escolhido é: " + numeroAdivinhado);
+  }
+
+  // evento executa sozinho ao carregar a página
+  window.onload = montaTabela();
+  
+  function montaTabela(){
+    var numeros32 = [];
+    var numeros16 = [];
+    var numeros8  = [];
+    var numeros4  = [];
+    var numeros2  = [];
+    var numeros1  = [];
+    
+    // este laço gera os 63 números do jogo
+    for(numeroJogo = 1; numeroJogo<64; numeroJogo++){
+      processador = numeroJogo;
+      
+      // tabela 32
+      if(Math.floor(processador / 32) == 1){
+        // adiciona o número na variavel da tabela
+        numeros32.push(numeroJogo);
+        // guarda o resto da divisão
+        processador = (processador % 32);
+      }
+      
+      // tabela 16
+      if(Math.floor(processador / 16) == 1){
+        // adiciona o número na variavel da tabela
+        numeros16.push(numeroJogo);
+        // guarda o resto da divisão
+        processador = (processador % 16);
+      }
+      
+      // tabela 8
+      if(Math.floor(processador / 8) == 1){
+        // adiciona o número na variavel da tabela
+        numeros8.push(numeroJogo);
+        // guarda o resto da divisão
+        processador = (processador % 8);
+      }
+      
+      // tabela 4
+      if(Math.floor(processador / 4) == 1){
+        // adiciona o número na variavel da tabela
+        numeros4.push(numeroJogo);
+        // guarda o resto da divisão
+        processador = (processador % 4);
+      }
+      
+      // tabela 2
+      if(Math.floor(processador / 2) == 1){
+        // adiciona o número na variavel da tabela
+        numeros2.push(numeroJogo);
+        // guarda o resto da divisão
+        processador = (processador % 2);
+      }
+      
+      // tabela 1
+      if(Math.floor(processador / 1) == 1){
+        // adiciona o número na variavel da tabela
+        numeros1.push(numeroJogo);
+      }
+    }
+      
+    linhaTabela = "";
+    
+    // montar as tabelinhas que vamos adivinhar
+    for(mostraTab = 0; mostraTab< 32; mostraTab++){
+      linhaTabela += "<TD>" + numeros1[mostraTab] + "</TD>";
+      if(mostraTab%4 == 3){
+        document.getElementById("tabNum1").innerHTML += 
+           "<TR>"+linhaTabela+"</TR>";
+        linhaTabela = "";
+      }
+    }
+    
+    // montar as tabelinhas que vamos adivinhar
+    for(mostraTab = 0; mostraTab< 32; mostraTab++){
+      linhaTabela += "<TD>" + numeros2[mostraTab] + "</TD>";
+      if(mostraTab%4 == 3){
+        document.getElementById("tabNum2").innerHTML += 
+           "<TR>"+linhaTabela+"</TR>";
+        linhaTabela = "";
+      }
+    }
+    
+    // montar as tabelinhas que vamos adivinhar
+    for(mostraTab = 0; mostraTab< 32; mostraTab++){
+      linhaTabela += "<TD>" + numeros4[mostraTab] + "</TD>";
+      if(mostraTab%4 == 3){
+        document.getElementById("tabNum4").innerHTML += 
+           "<TR>"+linhaTabela+"</TR>";
+        linhaTabela = "";
+      }
+    }
+    
+    // montar as tabelinhas que vamos adivinhar
+    for(mostraTab = 0; mostraTab< 32; mostraTab++){
+      linhaTabela += "<TD>" + numeros8[mostraTab] + "</TD>";
+      if(mostraTab%4 == 3){
+        document.getElementById("tabNum8").innerHTML += 
+           "<TR>"+linhaTabela+"</TR>";
+        linhaTabela = "";
+      }
+    }
+    
+    // montar as tabelinhas que vamos adivinhar
+    for(mostraTab = 0; mostraTab< 32; mostraTab++){
+      linhaTabela += "<TD>" + numeros16[mostraTab] + "</TD>";
+      if(mostraTab%4 == 3){
+        document.getElementById("tabNum16").innerHTML += 
+           "<TR>"+linhaTabela+"</TR>";
+        linhaTabela = "";
+      }
+    }
+    
+    // montar as tabelinhas que vamos adivinhar
+    for(mostraTab = 0; mostraTab< 32; mostraTab++){
+      linhaTabela += "<TD>" + numeros32[mostraTab] + "</TD>";
+      if(mostraTab%4 == 3){
+        document.getElementById("tabNum32").innerHTML += 
+           "<TR>"+linhaTabela+"</TR>";
+        linhaTabela = "";
+      }
+    }
+  }
+</SCRIPT>  
